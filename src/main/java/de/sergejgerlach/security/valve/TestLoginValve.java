@@ -14,7 +14,7 @@ public class TestLoginValve extends ValveBase {
 
     @Override
     public void invoke(Request request, Response response) throws IOException, ServletException {
-        log.config("=== entry invoke ===");
+        log.config("=== entry TestLoginValve invoke ===");
         request.addHeader("User-Name", "Sergej");
         getNext().invoke(request, response);
     }

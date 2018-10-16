@@ -8,5 +8,8 @@
     <valve>
         <class-name>de.sergejgerlach.security.valve.TestLoginValve</class-name>
     </valve>
+    <valve>
+        <class-name>de.sergejgerlach.security.valve.DummyValve</class-name>
+    </valve>
 
 </jboss-web>
