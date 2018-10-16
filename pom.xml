@@ -17,6 +17,10 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
+
+<!--
+        <environment>jboss-eap-6</environment>
+-->
     </properties>
 
     <dependencies>
@@ -24,6 +28,13 @@
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>6.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.web</groupId>
+            <artifactId>jbossweb</artifactId>
+            <version>7.5.7.Final-redhat-1</version>
             <scope>provided</scope>
         </dependency>
 

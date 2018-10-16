@@ -4,4 +4,9 @@
    <!-- <security-domain>AppUsersRoles</security-domain> -->
    <security-domain>AppLoginModule</security-domain>
    <disable-audit>true</disable-audit>
+
+    <valve>
+        <class-name>de.sergejgerlach.security.valve.TestLoginValve</class-name>
+    </valve>
+
 </jboss-web>
