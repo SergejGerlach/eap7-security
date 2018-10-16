@@ -117,6 +117,9 @@
             <logger category="de.sergejgerlach">
                 <level name="CONFIG"/>
             </logger>
+            <logger category="org.apache.catalina">
+                <level name="ALL"/>
+            </logger>
             <root-logger>
                 <level name="INFO"/>
                 <handlers>

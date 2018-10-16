@@ -8,13 +8,13 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.logging.Logger;
 
-public class TestLoginValve extends ValveBase {
+public class HeaderValve extends ValveBase {
 
-    private static final Logger log = Logger.getLogger(TestLoginValve.class.getName());
+    private static final Logger log = Logger.getLogger(HeaderValve.class.getName());
 
     @Override
     public void invoke(Request request, Response response) throws IOException, ServletException {
-        log.config("=== entry TestLoginValve invoke ===");
+        log.config("=== entry HeaderValve invoke ===");
         request.addHeader("User-Name", "Sergej");
         getNext().invoke(request, response);
     }
