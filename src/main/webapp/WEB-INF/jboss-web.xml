@@ -6,10 +6,10 @@
    <disable-audit>true</disable-audit>
 
     <valve>
-        <class-name>de.sergejgerlach.security.valve.HeaderValve</class-name>
+        <class-name>de.sergejgerlach.security.servlet.valve.HeaderValve</class-name>
     </valve>
     <valve>
-        <class-name>de.sergejgerlach.security.valve.DummyAuthenticatorValve</class-name>
+        <class-name>de.sergejgerlach.security.servlet.valve.DummyAuthenticatorValve</class-name>
     </valve>
 
 </jboss-web>

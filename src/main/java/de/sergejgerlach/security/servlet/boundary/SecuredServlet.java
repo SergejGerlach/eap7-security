@@ -1,19 +1,18 @@
 package de.sergejgerlach.security.servlet.boundary;
 
 import de.sergejgerlach.security.servlet.control.HtmlWriter;
+import de.sergejgerlach.security.servlet.control.LoggerHelper;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.security.Principal;
-import java.util.logging.Logger;
-
-import javax.servlet.ServletException;
 import javax.servlet.annotation.HttpMethodConstraint;
 import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.security.Principal;
+import java.util.logging.Logger;
 
 /**
  * A simple secured HTTP servlet.
@@ -26,13 +25,14 @@ public class SecuredServlet extends HttpServlet {
     private static final Logger log = Logger.getLogger(SecuredServlet.class.getName());
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.config("=== entry ===");
-        try (PrintWriter writer = resp.getWriter()) {
-            Principal user = req.getUserPrincipal();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        log.config("Entry SecuredServlet");
+        try (PrintWriter writer = response.getWriter()) {
+            LoggerHelper.logRequestHeader(request, log);
+            LoggerHelper.logRequestSecurity(request, log);
+            Principal user = request.getUserPrincipal();
             String body = "Current Principal '" + (user != null ? user.getName() : "NO AUTHENTICATED USER") + "'";
-            HtmlWriter.writePage(writer, "Secured Servlet", body);
+            HtmlWriter.writePage(writer, "Hello from Secured Servlet", body);
         }
     }
-
 }

@@ -1,5 +1,6 @@
-package de.sergejgerlach.security.valve;
+package de.sergejgerlach.security.servlet.valve;
 
+import de.sergejgerlach.security.servlet.control.LoggerHelper;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.apache.catalina.valves.ValveBase;
@@ -14,8 +15,10 @@ public class HeaderValve extends ValveBase {
 
     @Override
     public void invoke(Request request, Response response) throws IOException, ServletException {
-        log.config("=== entry HeaderValve invoke ===");
+        log.config("Entry HeaderValve : invoke");
         request.addHeader("User-Name", "Sergej");
+        LoggerHelper.logRequestHeader(request, log);
+        LoggerHelper.logRequestSecurity(request, log);
         getNext().invoke(request, response);
     }
 }

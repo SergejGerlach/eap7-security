@@ -16,22 +16,22 @@ import java.util.logging.Logger;
 @Produces(MediaType.APPLICATION_JSON)
 @PermitAll
 @Stateless
-public class RestApi {
+public class RestService {
 
-    private static final Logger log = Logger.getLogger(RestApi.class.getName());
+    private static final Logger log = Logger.getLogger(RestService.class.getName());
 
     @GET
     @Path("/info")
     public String info() {
-        log.config("=== entry info ===");
-        return "=== Shared Info ===";
+        log.config("Entry RestService : info");
+        return "Hello from REST service shared method 'info'!";
     }
 
     @GET
     @Path("/echo/{echo}")
     @RolesAllowed("SuperUser")
-    public String echo(@PathParam("echo") String param) {
-        log.config("=== entry echo ===");
-        return "=== " + param + " ===";
+    public String echo(@PathParam("echo") String echo) {
+        log.config("Entry RestService : echo");
+        return "Hello from REST service secured method 'echo'! You are send : '" + echo + "'";
     }
 }

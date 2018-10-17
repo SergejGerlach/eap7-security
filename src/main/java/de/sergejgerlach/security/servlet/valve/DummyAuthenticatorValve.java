@@ -1,5 +1,6 @@
-package de.sergejgerlach.security.valve;
+package de.sergejgerlach.security.servlet.valve;
 
+import de.sergejgerlach.security.servlet.control.LoggerHelper;
 import org.apache.catalina.authenticator.AuthenticatorBase;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.deploy.LoginConfig;
@@ -15,10 +16,19 @@ public class DummyAuthenticatorValve extends AuthenticatorBase {
 
     @Override
     protected boolean authenticate(Request request, HttpServletResponse httpServletResponse, LoginConfig loginConfig) throws IOException {
-        log.config("=== entry DummyAuthenticatorValve authenticate ===");
-        final Principal principal = this.context.getRealm().authenticate("dummy", "");
+        log.config("Entry DummyAuthenticatorValve : authenticate");
+        LoggerHelper.logRequestHeader(request, log);
+        LoggerHelper.logRequestSecurity(request, log);
+
+        Principal principal = request.getUserPrincipal();
         if (principal != null) {
-            log.config("=== authenticate with principal " + principal + " ===");
+            log.config("Already authenticated with principal " + principal);
+            return false;
+        }
+
+        principal = this.context.getRealm().authenticate("dummy", "");
+        if (principal != null) {
+            log.config("Authenticated with principal " + principal);
             request.setUserPrincipal(principal);
             return true;
         }

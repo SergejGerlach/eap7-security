@@ -58,11 +58,11 @@ public class GroupPrincipal extends UserPrincipal implements Group {
 
     public String toString() {
         StringBuilder sb = new StringBuilder(this.getName());
-        sb.append("(members:");
+        sb.append(" (members: ");
         for (Object o : this.members.keySet()) {
-            sb.append(o).append(',');
+            sb.append(o).append(", ");
         }
-        sb.setCharAt(sb.length() - 1, ')');
+        sb.setCharAt(sb.length() - 2, ')');
         return sb.toString();
     }
 }

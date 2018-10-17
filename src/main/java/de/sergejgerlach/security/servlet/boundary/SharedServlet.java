@@ -2,8 +2,8 @@
 package de.sergejgerlach.security.servlet.boundary;
 
 import de.sergejgerlach.security.servlet.control.HtmlWriter;
+import de.sergejgerlach.security.servlet.control.LoggerHelper;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +22,13 @@ public class SharedServlet extends HttpServlet {
     private static final Logger log = Logger.getLogger(SharedServlet.class.getName());
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.config("=== entry ===");
-        try (PrintWriter writer = resp.getWriter()) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        log.config("Entry SharedServlet");
+        LoggerHelper.logRequestHeader(request, log);
+        LoggerHelper.logRequestSecurity(request, log);
+        try (PrintWriter writer = response.getWriter()) {
             String body = "NO NEED AUTHENTICATED USER";
-            HtmlWriter.writePage(writer, "Shared Servlet", body);
+            HtmlWriter.writePage(writer, "Hello from Shared Servlet!", body);
         }
     }
 
