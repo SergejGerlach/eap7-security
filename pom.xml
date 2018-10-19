@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.sergejgerlach</groupId>
-    <artifactId>eap6-security</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>eap7-security</artifactId>
+    <version>1.0</version>
 
-    <name>JBoss EAP Security</name>
-    <description>Demo of Security JBoss EAP</description>
+    <name>JBoss EAP 7 Security</name>
+    <description>Demo of Security JBoss EAP 7</description>
     
     <packaging>war</packaging>
 
@@ -18,16 +18,13 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
-<!--
-        <environment>jboss-eap-6</environment>
--->
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -37,6 +34,32 @@
             <version>7.5.7.Final-redhat-1</version>
             <scope>provided</scope>
         </dependency>
+
+<!--
+        <dependency>
+            <groupId>org.jboss.bom</groupId>
+            <artifactId>jboss-eap-javaee7-with-tools</artifactId>
+            <version>7.1.3.GA</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+-->
+<!--
+        <dependency>
+            <groupId>org.jboss.spec</groupId>
+            <artifactId>jboss-javaee-7.0</artifactId>
+            <version>1.1.0.Final-redhat-3</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+-->
+        <!-- https://mvnrepository.com/artifact/io.undertow/undertow-core -->
+        <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-core</artifactId>
+            <version>1.4.18.Final-redhat-2</version>
+        </dependency>
+
 
         <!-- Test -->
         <dependency>

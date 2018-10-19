@@ -5,11 +5,19 @@
    <security-domain>AppLoginModule</security-domain>
    <disable-audit>true</disable-audit>
 
+<!--
     <valve>
         <class-name>de.sergejgerlach.security.servlet.valve.HeaderValve</class-name>
     </valve>
+-->
+    <http-handler>
+        <class-name>de.sergejgerlach.security.servlet.handler.HeaderHttpHandler</class-name>
+    </http-handler>
+
+<!--
     <valve>
         <class-name>de.sergejgerlach.security.servlet.valve.DummyAuthenticatorValve</class-name>
     </valve>
+-->
 
 </jboss-web>

@@ -1,4 +1,4 @@
-package de.sergejgerlach.security.servlet.valve;
+package de.sergejgerlach.security.servlet.handler;
 
 import de.sergejgerlach.security.servlet.control.LoggerHelper;
 import org.apache.catalina.authenticator.AuthenticatorBase;

@@ -1,4 +1,4 @@
-# eap6-security
+# eap7-security
 
 start JBoss with VM options :
 
