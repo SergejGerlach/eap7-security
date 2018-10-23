@@ -16,16 +16,17 @@
 
 package de.sergejgerlach.security.servlet.auth;
 
-import java.util.Map;
-
-import javax.security.auth.callback.CallbackHandler;
-
 import org.wildfly.security.http.HttpAuthenticationException;
 import org.wildfly.security.http.HttpServerAuthenticationMechanism;
 import org.wildfly.security.http.HttpServerAuthenticationMechanismFactory;
 
+import javax.security.auth.callback.CallbackHandler;
+import java.util.Map;
+import java.util.logging.Logger;
+
 public class HeaderMechanismFactory implements HttpServerAuthenticationMechanismFactory {
 
+    private static final Logger log = Logger.getLogger(HeaderMechanismFactory.class.getName());
     /*
      * This example uses service loader discovery to locate the factory, if a Provider was used instead visibility could be
      * reduced to be only accessible by the provider.
@@ -34,17 +35,19 @@ public class HeaderMechanismFactory implements HttpServerAuthenticationMechanism
     static final String CUSTOM_NAME = "CUSTOM_MECHANISM";
 
     public HttpServerAuthenticationMechanism createAuthenticationMechanism(String name, Map<String, ?> properties, CallbackHandler handler) throws HttpAuthenticationException {
+        log.config("Entry HeaderMechanismFactory : createAuthenticationMechanism");
         if (CUSTOM_NAME.equals(name)) {
             /*
              * The properties could be used at this point to further customise the behaviour of the mechanism.
              */
-            return new HeaderHttpAuthenticationMechanism(handler);
+            return new HeaderAuthenticationMechanism(handler);
         }
 
         return null;
     }
 
     public String[] getMechanismNames(Map<String, ?> properties) {
+        log.config("Entry HeaderMechanismFactory : getMechanismNames");
         /*
          * At this stage the properties could be queried to only return a mechanism if compatible with the properties provided.
          */

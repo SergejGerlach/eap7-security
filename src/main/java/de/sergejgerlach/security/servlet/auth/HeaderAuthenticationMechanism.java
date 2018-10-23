@@ -16,34 +16,31 @@
 
 package de.sergejgerlach.security.servlet.auth;
 
-import static de.sergejgerlach.security.servlet.auth.HeaderMechanismFactory.CUSTOM_NAME;
-
-import java.io.IOException;
+import org.wildfly.security.auth.callback.AuthenticationCompleteCallback;
+import org.wildfly.security.auth.callback.EvidenceVerifyCallback;
+import org.wildfly.security.auth.callback.IdentityCredentialCallback;
+import org.wildfly.security.credential.PasswordCredential;
+import org.wildfly.security.evidence.PasswordGuessEvidence;
+import org.wildfly.security.http.*;
+import org.wildfly.security.password.interfaces.ClearPassword;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
 import javax.security.auth.callback.NameCallback;
 import javax.security.auth.callback.UnsupportedCallbackException;
 import javax.security.sasl.AuthorizeCallback;
+import java.io.IOException;
+import java.util.logging.Logger;
 
-import org.wildfly.security.auth.callback.AuthenticationCompleteCallback;
-import org.wildfly.security.auth.callback.EvidenceVerifyCallback;
-import org.wildfly.security.auth.callback.IdentityCredentialCallback;
-import org.wildfly.security.credential.PasswordCredential;
-import org.wildfly.security.evidence.PasswordGuessEvidence;
-import org.wildfly.security.http.HttpAuthenticationException;
-import org.wildfly.security.http.HttpServerAuthenticationMechanism;
-import org.wildfly.security.http.HttpServerMechanismsResponder;
-import org.wildfly.security.http.HttpServerRequest;
-import org.wildfly.security.http.HttpServerResponse;
-import org.wildfly.security.password.interfaces.ClearPassword;
+import static de.sergejgerlach.security.servlet.auth.HeaderMechanismFactory.CUSTOM_NAME;
 
 /**
  *
  * @author <a href="mailto:darran.lofthouse@jboss.com">Darran Lofthouse</a>
  */
-class HeaderHttpAuthenticationMechanism implements HttpServerAuthenticationMechanism {
+public class HeaderAuthenticationMechanism implements HttpServerAuthenticationMechanism {
 
+    private static final Logger log = Logger.getLogger(HeaderAuthenticationMechanism.class.getName());
     /*
      * As the mechanism is instantiated by a factory it is generally a good practice to minimise visibility.
      */
@@ -58,6 +55,7 @@ class HeaderHttpAuthenticationMechanism implements HttpServerAuthenticationMecha
          */
 
         public void sendResponse(HttpServerResponse response) throws HttpAuthenticationException {
+            log.config("Entry HeaderAuthenticationMechanism : sendResponse");
             response.addResponseHeader(MESSAGE_HEADER, "Please resubmit the request with a username specified using the X-USERNAME and a password specified using the X-PASSWORD header.");
             response.setStatusCode(401);
         }
@@ -65,11 +63,12 @@ class HeaderHttpAuthenticationMechanism implements HttpServerAuthenticationMecha
 
     private final CallbackHandler callbackHandler;
 
-    HeaderHttpAuthenticationMechanism(final CallbackHandler callbackHandler) {
+    HeaderAuthenticationMechanism(final CallbackHandler callbackHandler) {
         this.callbackHandler = callbackHandler;
     }
 
     public void evaluateRequest(HttpServerRequest request) throws HttpAuthenticationException {
+        log.config("Entry HeaderAuthenticationMechanism : evaluateRequest");
         final String username = request.getFirstRequestHeaderValue(USERNAME_HEADER);
         final String password = request.getFirstRequestHeaderValue(PASSWORD_HEADER);
 
@@ -141,6 +140,7 @@ class HeaderHttpAuthenticationMechanism implements HttpServerAuthenticationMecha
     }
 
     public String getMechanismName() {
+        log.config("Entry HeaderAuthenticationMechanism : getMechanismName");
         return CUSTOM_NAME;
     }
 
