@@ -125,21 +125,21 @@ public class AppLoginModule implements LoginModule {
             UserPrincipal userPrincipal = new UserPrincipal(userName);
             subject.getPrincipals().add(userPrincipal);
             log.fine("added user principal '" + userName + "' to the Subject");
-        }
 
-        // add a group principal (roles) to the Subject
-        Group group = null;
-        if (roles != null) {
-            String[] roles = this.roles.split(",");
-            for (String role : roles) {
-                if (group == null) group = new GroupPrincipal("Roles");
-                group.addMember(new UserPrincipal(role));
-                log.fine("added member '" + role + "' to Group 'Roles'.");
+            // add a group principal (roles) to the Subject
+            Group group = null;
+            if (roles != null) {
+                String[] roles = this.roles.split(",");
+                for (String role : roles) {
+                    if (group == null) group = new GroupPrincipal("Roles");
+                    group.addMember(new UserPrincipal(role));
+                    log.fine("added member '" + role + "' to Group 'Roles'.");
+                }
             }
-        }
-        if (group != null) {
-            subject.getPrincipals().add(group);
-            log.fine("added group principal 'Roles' to the Subject.");
+            if (group != null) {
+                subject.getPrincipals().add(group);
+                log.fine("added group principal 'Roles' to the Subject.");
+            }
         }
     }
 
