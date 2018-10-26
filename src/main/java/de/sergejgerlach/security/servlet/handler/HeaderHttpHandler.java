@@ -1,6 +1,5 @@
 package de.sergejgerlach.security.servlet.handler;
 
-import de.sergejgerlach.security.servlet.control.LoggerHelper;
 import io.undertow.server.HttpHandler;
 import io.undertow.server.HttpServerExchange;
 
@@ -20,7 +19,9 @@ public class HeaderHttpHandler implements HttpHandler {
     @Override
     public void handleRequest(HttpServerExchange exchange) throws Exception {
         log.config("Entry HeaderHttpHandler : handleRequest");
-        LoggerHelper.logRequestHeader(exchange.getRequestHeaders(), log);
+        // LoggerHelper.logRequestHeader(exchange.getRequestHeaders(), log);
+        // Print Authorization header
+        log.config("Header : Authorization = " + exchange.getRequestHeaders().get("Authorization"));
         next.handleRequest(exchange);
     }
 
