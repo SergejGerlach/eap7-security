@@ -1,10 +1,10 @@
 # JBoss
-standalone/**/*
-!standalone/configuration
-!standalone/configuration/_standalone.xml
-!standalone/configuration/users.properties
-!standalone/configuration/roles.properties
-
+standalone/configuration/*-standalone.xml
+standalone/configuration/standalone_xml_history/**/*
+standalone/data/**/*
+standalone/deployments/**/*
+standalone/log/**/*
+standalone/tmp/**/*
 
 # deployed package files #
 
