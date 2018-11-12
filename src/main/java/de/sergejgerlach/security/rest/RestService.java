@@ -2,6 +2,8 @@
  */
 package de.sergejgerlach.security.rest;
 
+import org.jboss.ejb3.annotation.SecurityDomain;
+
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
@@ -14,6 +16,7 @@ import java.util.logging.Logger;
 
 @Path("")
 @Produces(MediaType.APPLICATION_JSON)
+@SecurityDomain("other")
 @PermitAll
 @Stateless
 public class RestService {
