@@ -242,9 +242,6 @@
                     <realm name="ManagementRealm" role-decoder="groups-to-roles"/>
                     <realm name="local" role-mapper="super-user-mapper"/>
                 </security-domain>
-                <security-domain name="exampleSD" default-realm="examplePropRealm" permission-mapper="default-permission-mapper">
-                    <realm name="examplePropRealm" role-decoder="groups-to-roles"/>
-                </security-domain>
             </security-domains>
             <security-realms>
                 <identity-realm name="local" identity="$local"/>
@@ -255,10 +252,6 @@
                 <properties-realm name="ManagementRealm">
                     <users-properties path="mgmt-users.properties" relative-to="jboss.server.config.dir" digest-realm-name="ManagementRealm"/>
                     <groups-properties path="mgmt-groups.properties" relative-to="jboss.server.config.dir"/>
-                </properties-realm>
-                <properties-realm name="examplePropRealm" groups-attribute="groups">
-                    <users-properties path="users-new.properties" relative-to="jboss.server.config.dir" plain-text="true"/>
-                    <groups-properties path="roles.properties" relative-to="jboss.server.config.dir"/>
                 </properties-realm>
             </security-realms>
             <mappers>
@@ -296,13 +289,6 @@
                             <mechanism-realm realm-name="Application Realm"/>
                         </mechanism>
                         <mechanism mechanism-name="FORM"/>
-                    </mechanism-configuration>
-                </http-authentication-factory>
-                <http-authentication-factory name="example-http-auth" http-server-mechanism-factory="global" security-domain="exampleSD">
-                    <mechanism-configuration>
-                        <mechanism mechanism-name="BASIC">
-                            <mechanism-realm realm-name="AppUsersRolesNew"/>
-                        </mechanism>
                     </mechanism-configuration>
                 </http-authentication-factory>
                 <provider-http-server-mechanism-factory name="global"/>
@@ -508,9 +494,6 @@
                 <response-header name="server-header" header-name="Server" header-value="JBoss-EAP/7"/>
                 <response-header name="x-powered-by-header" header-name="X-Powered-By" header-value="Undertow/1"/>
             </filters>
-            <application-security-domains>
-                <application-security-domain name="AppUsersRolesNew" http-authentication-factory="example-http-auth"/>
-            </application-security-domains>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:webservices:2.0">
             <wsdl-host>${jboss.bind.address:127.0.0.1}</wsdl-host>

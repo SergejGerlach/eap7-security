@@ -7,7 +7,7 @@
 
     <login-config>
         <auth-method>BASIC</auth-method>
-        <realm-name>AppUsersRolesNew</realm-name>
+        <realm-name>RealmUsersRoles</realm-name>
     </login-config>
 
 </web-app>
